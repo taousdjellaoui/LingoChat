@@ -43,3 +43,7 @@ La fonctionnalité de suppression des utilisateurs fonctionne uniquement dans ce
 3. **Lancez l'application** via votre IDE ou avec une commande comme :
    ```bash
    mvn spring-boot:run
+   
+## Réalisé par
+
+Cette application a été conçue et réalisée par **Taous Djellaoui** et **Joséphine Barbier**
