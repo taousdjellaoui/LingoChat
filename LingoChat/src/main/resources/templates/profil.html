@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/images/css/styleprofil.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
+
+    <title>Profil</title>
+</head>
+<body>
+<div th:insert="/include/header"> </div>
+<div class="insideGreyBox">
+
+            <section class="rightFriendprofile">
+                <div class="topSection">
+                    <div class="image-container">
+                        <img th:src="@{${'/images/utilisateurs/' + user.photo}}" alt="">
+                        <a th:if="${user.id != session.id && userSession!=null && !userSession.friends.contains(user)}" class="fa-solid fa-circle-plus icon-blue fa-weight-bold friendIconStatusAdd"
+                           th:href="@{'/profil_' + ${user.id} + '/add'}"
+                           title="Ajouter à la liste d'amis"
+                        ></a>
+                        <a th:if="${user.id != session.id && userSession!=null && userSession.friends.contains(user)}" class="fa-solid fa-circle-check icon-green fa-weight-bold friendIconStatusAdd"
+                           th:href="@{'/profil_' + ${user.id} + '/delete'}"
+                           title="Supprmier de la liste d'amis"
+                        ></a>
+
+                    </div>
+                    <div class="TopHeadProfil">
+                        <div class="rightInfoProfil">
+                            <h1>[[${user.userName}]]</h1>
+
+                            <div class="langues">
+                                <p>Langues Parlées</p>
+
+                                <div>
+                                    <div class="langue-container" th:each="lang : ${listeLangParle}">
+                                        <img th:src="@{${'/images/drapeaux/' + lang.photo}}" alt="">
+                                    </div>
+                                </div>
+
+                                <p>Langues Apprises</p>
+                                <div>
+                                    <div class="langue-container" th:each="lang : ${listeLangApprise}">
+                                        <img th:src="@{${'/images/drapeaux/' + lang.photo}}" alt="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="lien" th:if="${user.status == 'membreplus' or user.status == 'Membreplus' or user.status == 'admin' or user.status == 'Admin'}">
+                                <p>Suivez-moi!</p>
+                                    <div class="lien-container" th:each="lien : ${listeLien}">
+                                            <a  th:if="${user.id==session.id}" class="fa-solid fa-circle-minus icon-green icon-delete"
+                                               th:href="@{'/lien_' + ${lien.id} + '/delete'}"
+                                               title="Supprmier le lien"
+                                            ></a>
+                                        <a class="link" th:href="@{${lien.url}}">
+                                            [[${lien.description}]]
+                                        </a>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+                        <form class="link-form" method="post" th:action="@{/lien/save}" th:object="${lien}"
+                              th:if="${(user.status == 'membreplus' or user.status == 'Membreplus' or user.status == 'admin' or user.status == 'Admin')
+                              && user.id==session.id}"
+                              onsubmit="return checkLienMax(this);"
+                        >
+                            <input type="hidden" id="sessionUserId" th:value="${session.id}" />
+                            <div class="unBlocText">
+                                <h4>Nom du lien</h4>
+                                <input type="text" th:field="*{description}" name="description" required>
+                            </div>
+                            <div class="unBlocText">
+                                <h4>Url</h4>
+                                <input type="text" th:field="*{url}" name="url" required>
+                            </div>
+                            <div class="unBlocText">
+                                <input type="submit" value="Ajouter un lien">
+                            </div>
+                        </form>
+
+                    <div th:if="${user.id == session.id }" class="langueSelect">
+                        <h4>Ajouter une langue parlée</h4>
+                        <div>
+                            <div class="langue-container" th:each="lang : ${listeLang}">
+                                <img th:src="@{${'/images/drapeaux/' + lang.photo}}" alt="">
+                                <a  th:if="${userSession!=null && !userSession.languesParle.contains(lang)}" class="fa-solid fa-circle-plus icon-blue fa-weight-bold languesFlag "
+                                    th:href="@{'/langParle_' + ${lang.id} + '/add'}"
+                                    th:title="'Ajouter ' + ${lang.nom}"
+                                ></a>
+                                <a th:if="${userSession!=null &&  userSession.languesParle.contains(lang)}" class="fa-solid fa-circle-check icon-green fa-weight-bold languesFlag "
+                                    th:href="@{'/langParle_' + ${lang.id} + '/delete'}"
+                                   th:title="'Supprimer ' + ${lang.nom}"
+                                ></a>
+                            </div>
+                        </div>
+                        <h4>Ajouter une langue apprise</h4>
+                        <div>
+                            <div class="langue-container" th:each="lang : ${listeLang}">
+                                <img th:src="@{${'/images/drapeaux/' + lang.photo}}" alt="">
+                                <a  th:if="${userSession!=null && !userSession.languesApprise.contains(lang)}"class="fa-solid fa-circle-plus icon-blue fa-weight-bold languesFlag "
+                                    th:href="@{'langApprise_' + ${lang.id} + '/add'}"
+                                    th:title="'Ajouter ' + ${lang.nom}"
+                                ></a>
+                                <a th:if="${ userSession!=null && userSession.languesApprise.contains(lang)}" class="fa-solid fa-circle-check icon-green fa-weight-bold languesFlag "
+                                   th:href="@{'langApprise_' + ${lang.id} + '/delete'}"
+                                   th:title="'Supprimer ' + ${lang.nom}"
+                                ></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="BottomRefProfile">
+                    <h3>Mes références</h3>
+                    <div class="listeRef" >
+                        <hr>
+                        <div th:if="${listeRef.isEmpty()}">
+                            <p style="color: #2b33db;">Cet utilisateur n'as pas encore reçu de référence.</p>
+                        </div>
+                        <div class="uneRef" th:each="ref : ${listeRef}">
+                            <img th:src="@{${'/images/utilisateurs/' +ref.auteur.photo}}" alt="">
+                            <div class="auteurDesc">
+                                <p><a th:href="@{'/profil_'+${ref.auteur.id}}">[[${ref.auteur.userName}]]</a></p>
+                                <h6>[[${ref.description}]]</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    <!--Model dialogue -->
+    <div class="modal fade text-center" id="modalDialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalTitle">Avertissement</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <span id="modalBody"></span>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function checkLienMax(form) {
+            var userId = $("#sessionUserId").val();
+            $.ajax({
+
+                type : 'POST',
+                url :  '[[@{/lien/check_nombre}]]',
+                data: { id: userId },
+                data: { id: userId },
+
+                success : function(data) {
+                    //alert("Reponse venant du Serveur " + data);
+
+                    if(data==='OK'){
+                        form.submit();
+                        //alert("Maximum nombre de lien NON atteint pour : " + $("#sessionId").val());
+                    }else{
+                        showModalDialog("Erreur", "Nombre maximum de liens atteint (4)\n" +
+                            "veuillez supprimer un lien avant d'en ajouter un nouveau");
+                    }
+                }
+            });
+
+            return false;
+        }
+
+        function showModalDialog(title, message) {
+            $("#modalTitle").text(title);
+            $("#modalBody").text(message);
+            $("#modalDialog").modal();
+
+        }
+
+    </script>
+
+</div>
+<div th:insert="/include/footer"> </div>
+
+</body>
+</html>

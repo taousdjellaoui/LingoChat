@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/images/css/stylediscoveries.css}"/>
+
+    <title>Discover</title>
+</head>
+<body>
+<div th:insert="/include/header"> </div>
+<section class="searchBar">
+
+    <div class="leftTrierPar">
+        <h4>Afficher par</h4>
+        <form action="discoverController" method="get">
+            <select name="TrierPar" id="membresDisplay">
+                <option value="">Tout les membres</option>
+                <option value="MembrePlus">Membre Plus</option>
+                <option value="Utilisateur">Utilisateur</option>
+            </select>
+            <input type="submit"  value="Rechercher" class=RechercherBtn />
+        </form>
+    </div>
+
+    <div class="middleRechercher">
+        <h4>Chercher un ou des utilisateurs par nom</h4>
+        <form action="discoverController" method="get">
+            <input type="search" name="nom">
+            <input type="submit" value="Rechercher" class=RechercherBtn />
+        </form>
+    </div>
+
+    <div class="rightFiltrerPar">
+        <h4>Filtrer Par</h4>
+        <form action="rightFiltrerPar" method="get">
+            <label for="lang1">
+                <input type="checkbox" id="lang1" name="Anglais" checked> Anglais
+            </label><br>
+            <label for="lang2">
+                <input type="checkbox" id="lang2" name="Allemand" checked> Allemand
+            </label><br>
+            <label for="lang3">
+                <input type="checkbox" id="lang3" name="Arabe" checked> Arabe
+            </label><br>
+            <label for="lang4">
+                <input type="checkbox" id="lang4" name="Chinois" checked> Chinois
+            </label><br>
+            <label for="lang5">
+                <input type="checkbox" id="lang5" name="Espagnol" checked> Espagnol
+            </label><br>
+            <label for="lang6">
+                <input type="checkbox" id="lang6" name="Français" checked> Français
+            </label><br>
+            <label for="lang7">
+                <input type="checkbox" id="lang7" name="Italien" checked> Italien
+            </label><br>
+            <label for="lang8">
+                <input type="checkbox" id="lang8" name="Japonais" checked> Japonais
+            </label><br>
+            <label for="lang9">
+                <input type="checkbox" id="lang9" name="Portuguais" checked> Portuguais
+            </label><br>
+            <label for="lang10">
+                <input type="checkbox" id="lang10" name="Russe" checked> Russe
+            </label><br>
+        </form>
+    </div>
+</section>
+<section class="displaySearchResult">
+
+            <div class="displayPersonne" th:each="user : ${listUtilisateurs}">
+                <img th:src="@{${'/images/utilisateurs/' + user.photo}}" alt="">
+
+                <div class="infoRight">
+                    <h3><a th:href="@{'/profil_'+${user.id}}">[[${user.userName}]]</a></h3>
+
+                    <div class="imgDrapeauxLangues">
+                        <h4>Langue(s) parlée(s)</h4>
+
+                        <div>
+                            <div class="langue-container" th:each="langue : ${user.languesParle}">
+                                <img th:src="@{${'/images/drapeaux/' + langue.photo}}" th:alt="${langue.nom}">
+                            </div>
+                        </div>
+
+                        <h4>Langue(s) apprise(s)</h4>
+                        <div>
+                            <div class="langue-container" th:each="langue : ${user.languesApprise}">
+                                <img th:src="@{${'/images/drapeaux/' + langue.photo}}" th:alt="${langue.nom}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+</section>
+<div th:insert="/include/footer"> </div>
+
+
+</body>
+</html>

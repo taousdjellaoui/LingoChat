@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/images/css/styleprofil.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
+
+    <title>Amis</title>
+</head>
+<body>
+<div th:insert="/include/header"> </div>
+<div class="insideGreyBox">
+    <section class="leftFriendlist">
+        <h1>Vos amis</h1>
+        <hr>
+        <div class="rechercheAmis">
+            <form th:action="@{'/amis/recherche'}" method="get">
+                <input type="search" name="keyword" placeholder="Chercher des amis">
+                <input type="submit" value="Rechercher" class=RechercherBtn />
+            </form>
+        </div>
+        <p>[[${listAmis.size}]] amis</p>
+        <div class="friendListDisplay">
+
+                    <div class="friend" th:each="ami : ${listAmis}">
+                        <img th:src="@{${'/images/utilisateurs/' + ami.photo}}" alt="">
+                        <div class="shortLeftInfo">
+                            <div class="NameAndFavorite">
+                            <a th:href="@{'/amis_' + ${ami.id}}" th:amiId="${ami.id}">
+                                <p>[[${ami.userName}]]</p>
+                            </a>
+                            <a th:if="${(user.status == 'membreplus' or user.status == 'Membreplus' or user.status == 'admin' or user.status == 'Admin')
+                              && user.friendsFav.contains(ami)}"  class="fa-solid fa-star fa icon-yellow star"
+                               th:href="@{'/fav_' + ${ami.id} + '/delete'}"
+                               title="Supprimer des favoris"></a>
+                            <a th:if="${(user.status == 'membreplus' or user.status == 'Membreplus' or user.status == 'admin' or user.status == 'Admin')
+                                 && !user.friendsFav.contains(ami)}" class="fa-regular fa-star fa icon-yellow star"
+                               th:href="@{'/fav_' + ${ami.id} + '/add'}"
+                               title="Ajouter en favoris"></a>
+                            </div>
+                            <form action="" method="get">
+                                <input type="submit" value="Envoyer un message" class=EnvoyerMessageBtn />
+                            </form>
+
+
+                        </div>
+                    </div>
+        </div>
+
+    </section>
+    <section class="rightFriendprofile" th:if="${friendProfile!=null}">
+
+            <div class="topSection" th:friendProfile="${friendProfile}">
+                <div class="image-container">
+                <img th:src="@{${'/images/utilisateurs/' + friendProfile.photo}}" alt="">
+                    <a th:if="${friendProfile.id != session.id}" class="fa-solid fa-circle-minus icon-green fa-weight-bold friendIconStatusAdd"
+                       th:href="@{'/amis_' + ${friendProfile.id} + '/delete'}"
+                       title="Supprmier de la liste d'amis"
+                    ></a>
+
+                </div>
+                <div class="TopHeadProfil">
+                    <div class="rightInfoProfil">
+                        <h1>[[${friendProfile.userName}]]</h1>
+
+                        <div class="langues">
+                            <p>Langues Parlées</p>
+
+                            <div>
+                                <div class="langue-container" th:each="lang : ${listeLangParle}">
+                                    <img th:src="@{${'/images/drapeaux/' + lang.photo}}" alt="">
+                                </div>
+                            </div>
+
+                            <p>Langues Apprises</p>
+                            <div>
+                                <div class="langue-container" th:each="lang : ${listeLangApprise}">
+                                    <img th:src="@{${'/images/drapeaux/' + lang.photo}}" alt="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lien" th:if="${friendProfile.status == 'membreplus' or friendProfile.status == 'Membreplus' or friendProfile.status == 'admin' or friendProfile .status == 'Admin'}">
+                            <p>Suivez-moi!</p>
+                            <div class="lien-container" th:each="lien : ${listeLien}">
+                                <a th:href="@{${lien.url}}">
+                                    [[${lien.description}]]
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="BottomRefProfile">
+                <section class="sectionADiviser">
+                    <div>
+                        <h3>Mes références</h3>
+                        <div class="listeRef">
+                            <hr>
+                            <div th:if="${listeRef.isEmpty()}">
+                                <p style="color: #2b33db;">Cet utilisateur n'as pas encore reçu de référence.</p>
+                            </div>
+                            <div th:if="${!listeRef.isEmpty()}" class="uneRef" th:each="ref : ${listeRef}">
+                                <img th:src="@{${'/images/utilisateurs/' +ref.auteur.photo}}" alt="">
+                                <div class="auteurDesc">
+                                    <p><a th:href="@{'/profil_'+${ref.auteur.id}}">[[${ref.auteur.userName}]]</a></p>
+                                    <h6>[[${ref.description}]]</h6>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="addRef">
+                        <h3>Ajouter une référence</h3>
+                        <form th:action="@{'/reference/save_' + ${friendProfile.id}}" method="post">
+                            <textarea id="refArea"  name="description" rows="5" cols="40"></textarea>
+                            <input type="submit" value="Ajouter une référence">
+                        </form>
+                    </div>
+                </section>
+            </div>
+
+    </section>
+</div>
+<div th:insert="/include/footer"> </div>
+
+</body>
+</html>

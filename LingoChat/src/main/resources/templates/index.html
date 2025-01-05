@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="">
+
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/images/css/style.css}"/>
+    <title>Accueil</title>
+
+</head>
+
+<body>
+<div th:insert="/include/header"> </div>
+
+<section class="gradIndex">
+    <div id="topDivAccueil">
+
+        <img th:src="@{/images/logo/LeftLogo.png}" alt="logo">
+        <img th:src="@{/images/utilisateurs/textRightAccueil.png}" alt="Lingochat : Un monde, une langue, une connexion.">
+    </div>
+</section>
+<div id="bottomDivAccueil">
+    <h1>Aperçu des langues disponibles</h1>
+    <div class="imagesIndex">
+        <img th:src="@{/images/drapeaux/imgUSA.png}" alt="imgUSA">
+        <img th:src="@{/images/drapeaux/imgFR.png}" alt="imgFR">
+        <img th:src="@{/images/drapeaux/imgIndia.png}" alt="imgIndia">
+        <img th:src="@{/images/drapeaux/imgSpain.png}" alt="imgSpain">
+        <img th:src="@{/images/drapeaux/imgKorea.png}" alt="imgKorea">
+        <img th:src="@{/images/drapeaux/imgMexico.png}" alt="imgMexico">
+        <img th:src="@{/images/drapeaux/imgGermany.png}" alt="imgGermany">
+        <img th:src="@{/images/drapeaux/imgRussia.png}" alt="imgRussia">
+        <img th:src="@{/images/drapeaux/imgJapan.png}" alt="imgUSA">
+    </div>
+</div>
+<div th:insert="/include/footer"> </div>
+
+</body>
+</html>

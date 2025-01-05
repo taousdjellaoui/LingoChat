@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/images/css/stylediscoveries.css}"/>
+
+    <title>Forum Creation</title>
+</head>
+<body>
+<div th:insert="/include/header"> </div>
+<form id="forumCreate" method="post" th:action="@{/forum/save}" th:object="${forum}">
+    <div class="formDiv">
+        <h2>Créer un forum</h2>
+        <div class="unBlocText">
+            <h4>Titre de votre forum:</h4>
+            <input type="text" name="titre"  th:field="*{nom}" required>
+        </div>
+        <div class="unBlocText">
+            <h4>Description du forum:</h4>
+            <textarea name="description" th:field="*{description}" rows="4" cols="30"></textarea>
+        </div>
+        <div class="unBlocText">
+            <h4>Ajouter votre premier post au forum: </h4>
+            <textarea name="postDescription" rows="10" cols="40"></textarea>
+        </div>
+        <div class="unBlocText">
+            <input type="submit" value="Créer le forum">
+
+        </div>
+    </div>
+</form>
+<div th:insert="/include/footer"> </div>
+</body>
+</html>

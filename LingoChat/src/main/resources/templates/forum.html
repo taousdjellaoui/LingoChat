@@ -1,0 +1,114 @@
+    <!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org" lang="">
+
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" th:href="@{/images/css/stylediscoveries.css}"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <title>Forum</title>
+    </head>
+
+    <body>
+    <div th:insert="/include/header"></div>
+    <section class="forumBody">
+        <div class="insideBlue">
+            <h1>Forum</h1>
+            <div class="LesPostsEtAddPost" th:forum="${forum}">
+                <input type="hidden" th:field="*{id}"/>
+                <section class="displayPostSection">
+                    <div class="OriginalPost">
+                        <div class="rightImgName">
+                            <img th:src="@{${'/images/utilisateurs/' + post.utilisateur.photo}}" alt="">
+                            <a th:href="@{'/profil_'+${post.utilisateur.id}}"><p>[[${post.utilisateur.userName}]]</p></a>
+                        </div>
+                        <div class="leftPostText">
+                            <div class="whiteBox">
+                                <h2>[[${forum.nom}]]</h2>
+                                <p>[[${post.description}]]</p>
+                            </div>
+                            <p class="date">[[${post.date}]]</p>
+                        </div>
+                        <div>
+                            <a th:if="${session.status == 'admin' or session.status == 'Admin'}"
+                               th:href="@{'/forum_' + ${forum.id} + '/delete'}" class="fa-solid icon-red fa-triangle-exclamation alert-icon"  title="Supprimer ce forum"></a>
+                        </div>
+                    </div>
+                    <article th:each="post : ${listPost}">
+
+                        <div class="AnotherPost">
+                            <div class="rightImgName">
+                                <img th:src="@{${'/images/utilisateurs/' + post.utilisateur.photo}}" alt="">
+                                <a th:href="@{'/profil_'+${post.utilisateur.id}}"><p>[[${post.utilisateur.userName}]]</p></a>
+                            </div>
+                            <div class="leftPostText">
+                                <div class="whiteBox">
+                                    <p>[[${post.description}]]</p>
+                                </div>
+                                <p class="date">[[${post.date}]]</p>
+                            </div>
+                            <div>
+                                <a th:if="${session.status == 'admin' or session.status == 'Admin'}"
+                                   th:href="@{'/forum_' + ${forum.id} + '/post_' + ${post.id} + '/delete'}"
+                                   class="fa-solid icon-red fa-triangle-exclamation alert-icon"  title="Supprimer ce post"
+                                   data-type="post"></a>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+
+                <section class="addPostSection" th:if="${session.id!=null}">
+                    <h3>Ajouter un post</h3>
+                    <form th:action="@{/post/save}" method="post">
+                        <textarea id="postArea" name="description" rows="20" cols="30"></textarea>
+                        <input type="hidden" name="forumId" th:value="${forum.id}"/>
+                        <input type="submit" value="Ajouter un post">
+                    </form>
+                </section>
+
+            </div>
+        </div>
+    </section>
+    <div th:insert="/include/footer"></div>
+
+    <!--Model dialogue -->
+    <div class="modal fade text-center" id="confirmModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Confirmation de suppression</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <span id="confirmText"></span>
+                </div>
+
+                <div class="modal-footer">
+                    <a class="btn btn-success" href="" id="yesButton">Oui</a>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Non</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $(".alert-icon").on("click", function (e) {
+                e.preventDefault();
+                var link = $(this);
+                var type = link.data("type");
+                var confirmationText = type === "post" ? "Voulez-vous vraiment supprimer ce post ?" : "Voulez-vous vraiment supprimer ce forum ?";
+
+                $("#yesButton").attr("href", link.attr("href"));
+                $("#confirmText").text(confirmationText);
+                $("#confirmModal").modal();
+            });
+        });
+    </script>
+    </body>
+    </html>

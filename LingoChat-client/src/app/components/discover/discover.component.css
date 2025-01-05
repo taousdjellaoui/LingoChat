@@ -1,0 +1,420 @@
+* {
+    font-family: Verdana, Helvetica, sans-serif;
+    font-weight: bold;
+}
+/*SECTION DU SEARCHBAR*/
+.searchBar {
+    display: flex;
+    justify-content: space-between;
+    background-color: #A7D676;
+    border-radius: 5px;
+    padding-bottom: 10px;
+    margin: 10px;
+}
+
+.leftTrierPar select {
+    height: 30px;
+    /* Set the desired height for the dropdown menu */
+    border-color: white;
+}
+
+.leftTrierPar {
+    flex-basis: 30%;
+}
+.leftTrierPar input[type="submit"]:hover {
+    background-color: #33539E;
+}
+.leftTrierPar select {
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    border-width: 3px;
+    border-color: #A8DEE0;
+}
+.middleRechercher input[type="submit"]:hover {
+    background-color: #33539E;
+}
+
+.RechercherBtn {
+    background-color: #A8DEE0;
+    color: white;
+    padding: 5px;
+    border-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.middleRechercher input[type="search"] {
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    border-width: 3px;
+    border-color: #A8DEE0;
+
+}
+
+.rightFiltrerPar form {
+    display: flex;
+    flex-wrap: wrap;
+    /* Permet aux éléments de passer à la ligne */
+}
+
+.rightFiltrerPar label {
+    flex-basis: 20%;
+    /* Pour chaque label occupe 20% de la largeur du conteneur (5 labels par ligne) */
+    display: flex;
+    align-items: center;
+}
+
+.rightFiltrerPar input[type="checkbox"] {
+    margin-right: 5px;
+    /* Ajoute un espace entre le checkbox et le texte */
+}
+
+.leftTrierPar,
+.middleRechercher {
+    flex-basis: 35%;
+    /* Les deux premières divs prennent 35% chacune */
+}
+
+.leftTrierPar,
+.middleRechercher,
+.rightFiltrerPar {
+    margin-left: 30px;
+    /* Ajoutez de la marge entre chaque div si nécessaire */
+
+}
+
+.leftTrierPar h4,
+.middleRechercher h4,
+.rightFiltrerPar h4 {
+    margin-bottom: 5px;
+    /* Ajoutez de la marge entre chaque div si nécessaire */
+    margin-top: 10px;
+}
+
+/*SECTION DU SEARCH RESULT*/
+.displaySearchResult {
+    display: flex;
+    /* Utilisation de flexbox pour placer les divs côte à côte */
+    flex-wrap: wrap;
+    /* Permet aux éléments de passer à la ligne */
+}
+
+.displayPersonne {
+    display: flex;
+    flex: 1;
+    /* Chaque div prendra la même largeur pour être répartie en trois */
+    height: 200px;
+    /* Hauteur spécifique pour chaque div */
+    min-width: 420px;
+    /*max-width: 420px;*/ /*uncomment to have a set maximum width*/
+    margin: 10px;
+    /* Espacement entre les lignes */
+    padding: 10px;
+    background-color: #33539E;
+    border-radius: 10px;
+}
+
+.displayPersonne>img {
+    flex-shrink: 0;
+    /* Empêche l'image de se rétrécir */
+    height: 100%;
+    /* Ensure the height is 100% */
+    object-fit: cover;
+    /* Ensure the image covers the entire space */
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+}
+.displayPersonne a {
+    color: #A8DEE0;
+}
+.displayPersonne h3 {
+    padding-bottom: 5px;
+}
+.infoRight {
+    height: 100%;
+    margin-left: 20px;
+    /* Espacement entre l'image et la div .infoRight */
+}
+
+.imgDrapeauxLangues {
+    height: 100%;
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+}
+.imgDrapeauxLangues > div {
+    display: flex;
+    margin-bottom: 20px; /* Add spacing between sections */
+    flex-flow: row wrap; /* Allow items to wrap onto multiple lines */
+
+}
+.langue-container {
+    display: flex;
+    max-width: 55px; /* Adjust the value as needed */
+}
+.infoRight img {
+    width: 50px;
+    height: 40px; /* Set a fixed height for the images */
+    object-fit: cover; /* Crop the overflow */
+    margin-right: 10px; /* Add spacing between images */
+    border-radius: 5px;
+}
+
+.infoRight h3,
+.imgDrapeauxLangues h4 {
+    color: white;
+    margin-bottom: 0px;
+    /* Ajoutez de la marge entre chaque div si nécessaire */
+    margin-top: 0px;
+}
+
+@media screen and (max-width: 1680) and (min-width: 1051) {
+    .rightFiltrerPar label {
+        flex-basis: 50%;
+        /* Quand l'écran est trop petit, chaque label occupe 50% */
+    }
+
+    .displaySearchResult {
+        flex-wrap: nowrap;
+        /* Prevent wrapping */
+        overflow-x: scroll;
+        /* Enable horizontal scrolling */
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    .displaySearchResult {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .ForumDesc {
+        width: 100%; /* Make each .ForumDesc take up 100% width on smaller screens */
+    }
+}
+
+.forumBody{
+    border-radius: 2px;
+    width: 100%;
+    height: 100%;
+    background-color: #A8DEE0;
+}
+.forumBody h1{
+    margin: 6px;
+    color: white;
+}
+.insideBlue{
+    margin: 10px;
+    padding-top: 0.5px;
+    padding-bottom: 0.5px;
+}
+.LesPostsEtAddPost{
+    display: flex;
+}
+.OriginalPost{
+    display: flex;
+    align-items: flex-start;
+    background-color: #A7D676;
+    padding: 10px;
+    padding-bottom:0px;
+    padding-right: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 3px solid #33539E;
+}
+.rightImgName {
+    margin-top: 5px;
+}
+.rightImgName>img {
+    height: 70px;
+    object-fit: cover;
+    border-radius: 2%;
+    aspect-ratio: 1/1;
+}
+.rightImgName>p {
+    color: #33539E;
+    font-size: 12px;
+    text-decoration: underline;
+    margin-top: 0;
+}
+.leftPostText{
+    margin-left: 10px;
+    padding: 0px;
+}
+.whiteBox{
+    background-color: white;
+    padding: 10px;
+    padding-bottom: 1px;
+    margin-top: 5px;
+    box-shadow: 0 5px 2px rgba(0, 0, 0, 0.103); /* Add shadow */
+    min-width: calc(100% - 20px);
+}
+.icon-red{
+    color: #d81d31;
+}
+.alert-icon{
+    margin-left: 10px;
+    margin-top: 11px;
+}
+.whiteBox h2 {
+    margin-top: 0;
+    color: #33539E;
+}
+.whiteBox p {
+    margin-top: 0;
+    color: #33539E;
+    font-weight: 500;
+}
+.date{
+    margin-top: 6px;
+    font-size: 0.7em;
+    color: #909090;
+    font-weight: 350;
+}
+.AnotherPost:nth-child(even){
+    background-color: #D9D9D9;
+}
+.AnotherPost:nth-child(odd) {
+    background-color: #f3dfc2;
+}
+.AnotherPost{
+    display: flex;
+    align-items: flex-start;
+    padding: 10px;
+    padding-bottom:0px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 3px solid #ffffff;
+}
+.addPostSection {
+    margin-left: 10px;
+}
+
+.addPostSection h3{
+    margin-top: 0px;
+    color: #33539E;
+}
+.addPostSection input[type="submit"] {
+    margin-top: 5px;
+    background-color: #D9D9D9;
+    color: #33539E;
+    padding: 5px;
+    border: 3px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.addPostSection input[type="submit"]:hover {
+    background-color: #A7D676;
+}
+#postArea{
+    border: 3px solid #A7D676;
+}
+@media screen and (max-width: 1080px) {
+    #postArea{
+        width: 150px; /* Set the width of the text area */
+        height: 300px; /* Set the height of the text area */
+    }
+}
+@media screen and (max-width: 760px) {
+    .addPostSection {
+        display: none; /* Hide the section */
+    }
+    .ForumDesc {
+        width: 100%; /* Make each .ForumDesc take up 100% width on smaller screens */
+    }
+}
+
+
+/*SECTION DU COMMUNITYSEARCHRESULT*/
+.ForumDesc {
+    display: inline-block;
+    width: 50%;
+    box-sizing: border-box;
+    display: flex;
+    height: 145px;
+    flex-grow: 1;
+    margin: 10px;
+    padding: 10px;
+    background-color: #D9D9D9;
+    border: 5px solid #a8dee097;/* Add border to .ForumText for clarity */
+    border-radius: 5px;
+}
+
+.ForumText {
+    overflow: hidden;/* Hide overflow text */
+}
+
+.ForumText h3 {
+    margin-top: 0px;/* Remove top margin from heading */
+}
+
+.ForumText p {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    min-width: 200px;
+    margin-left: 10px;
+}
+
+.ForumDesc>img {
+    margin-left: 16px;
+    height: 100%;
+    /* Ensure the height is 100% */
+    object-fit: cover;
+    /* Ensure the image covers the entire space */
+    border-radius: 5%;
+    aspect-ratio: 1/1;
+}
+/*SECTION CREATE FORUM*/
+* {
+    font-family: Verdana, Helvetica, sans-serif;
+    font-weight: bold;
+}
+.formDiv>h2{
+    color: #33539E;
+}
+
+.unBlocText{
+    flex-basis:1;
+}
+#forumCreate {
+    margin-top: 0px;
+    margin: 15px ;
+    width: 95vw;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #A7D676;
+}
+.formDiv input[type="text"] {
+    padding: 5px;
+    margin-bottom: 0px;
+    border-radius: 10px;
+    border-width: 3px;
+    border-color: #A8DEE0;
+    }
+.formDiv input[type="submit"] {
+    background-color: #A8DEE0;
+    color: white;
+    padding: 10px;
+    border: 2px;
+    border-radius: 5px;
+    cursor: pointer;
+    border-color: #D9D9D9;
+}
+.formDiv input[type="submit"]:hover {
+    background-color: #33539E;
+}
+.formDiv   {
+    padding: 10px;
+    display: block;
+}
+.formDiv textarea{
+    padding: 5px;
+    margin-bottom: 0px;
+    border-radius: 10px;
+    border-width: 3px;
+    border-color: #A8DEE0;
+}

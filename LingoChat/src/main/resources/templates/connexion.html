@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" th:href="@{/images/css/style.css}"/>
+    <link rel="stylesheet"  th:href="@{/images/css/registerStyle.css}"/>
+    <title>Connexion</title>
+
+</head>
+<body>
+<div th:insert="/include/header"> </div>
+
+
+<div>
+    <div th:if="${message!=null}" class="alert alert-danger text-center">
+        [[${message}]]
+    </div>
+<form class="form-signin"
+      th:action="@{/connexion}" method="post" th:objects="${utilisateur} ">
+    <div class="formDiv">
+        <h2>Se connecter</h2>
+    </div>
+    <div class="formDiv">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required th:field="*{utilisateur.courriel}">
+    </div>
+    <div class="formDiv">
+        <label for="password">mot de passe:</label>
+        <input type="password" id="password" name="password" required th:field="*{utilisateur.motDePasse}">
+    </div>
+    <div class="formDiv">
+        <input type="submit" value="Se connecter">
+    </div>
+</form>
+</div>
+<div th:insert="/include/footer"> </div>
+</body>
+</html>

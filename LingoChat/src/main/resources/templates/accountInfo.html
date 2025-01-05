@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <link rel="stylesheet" th:href="@{/images/css/style.css}"/>
+    <link rel="stylesheet"  th:href="@{/images/css/registerStyle.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Account Settings</title>
+</head>
+<body>
+<div th:insert="/include/header"> </div>
+<div class="conteneur_principal">
+    <div class="zone_gauche">
+        <ul class="nice-list">
+            <h2>Paramètre</h2>
+            <h4>Compte</h4>
+            <li  th:class="${action == '1' ? 'nav-link active' : 'nav-link'}"><a th:href="@{'/accountInfo='+1}">Changement de l'email</a></li>
+            <li th:class="${action == '2' ? 'nav-link active' : 'nav-link'}"><a th:href="@{'/accountInfo='+2}" >Changement du Mot de passe</a></li>
+            <!-- <li><a th:href="@{'/accountInfo='+3}">Bloquer un ami</a></li> -->
+            <li th:class="${action == '4' ? 'nav-link active' : 'nav-link'}"><a th:href="@{'/accountInfo='+4}" >Supprimer compte</a></li>
+
+            <h4 th:if="${session.status == 'admin' or session.status == 'Admin'}">Admin</h4>
+            <li th:if="${session.status == 'admin' or session.status == 'Admin'}" th:class="${action == '5' ? 'nav-link active' : 'nav-link'}"><a th:href="@{'/accountInfo='+5}"  >Ajouter un utilisateur</a></li>
+            <li th:if="${session.status == 'admin' or session.status == 'Admin'}" th:class="${action == '6' ? 'nav-link active' : 'nav-link'}"><a th:href="@{'/accountInfo='+6}" >Gestion des  comptes</a></li>
+        </ul>
+    </div>
+
+    <div class="zone_droite">
+        <div th:switch="${action}">
+
+            <div th:case="'1'">
+                <div th:if="${message!=null}" class="alert alert-success text-center">
+                    [[${message}]]
+                </div>
+                <form th:action="@{/accountInfo/ChangerEmail}" method="post" class="centered-form" style="max-width: 700px;" enctype="multipart/form-data">
+                    <input type="hidden" name="cas" value="1" />
+
+                    <div style="border: 1px solid #ccc; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+                        <div style="margin-bottom: 10px;">
+                            <label for="email" style="display: inline-block; width: 150px;">Nouveau E-mail:</label>
+                            <input type="email" id="email" name="email" required minlength="8" maxlength="128" style="padding: 8px; width: 100%;" />
+                        </div>
+                    </div>
+
+                    <div class="formDiv">
+                    <input type="submit" value="Enregistrer">
+                    </div>
+                </form>
+            </div>
+            <div th:case="'2'" >
+                <div th:if="${message!=null}" class="alert alert-success text-center">
+                    [[${message}]]
+                </div>
+                <form th:action="@{/accountInfo/ChangerPassword}" method="post" class="centered-form" style="max-width: 700px;" enctype="multipart/form-data">
+                    <input type="hidden" name="cas" value="1" />
+
+                    <div style="border: 1px solid #ccc; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+                        <div style="margin-bottom: 10px;">
+                            <label for="password" style="display: inline-block; width: 150px;">Nouveau Mot de Passe</label>
+                            <input type="password" id="password" name="password" required minlength="8" maxlength="128" style="padding: 8px; width: 100%;" />
+                        </div>
+                    </div>
+
+                    <div class="formDiv">
+                        <input type="submit" value="Enregistrer">
+                    </div>
+                </form>
+            </div>
+            <div th:case="'4'"  >
+                <div th:if="${message!=null}" class="alert alert-success text-center">
+                    [[${message}]]
+                </div>
+
+                <form  method="post" class="centered-form" th:action="@{/utilisateurs/delete}">
+                    <input type="hidden" name="cas" value="4" />
+                    <div class="formDiv">
+                        <label >voulez-vous supprimer votre compte?</label> <br>
+                    </div>
+                    <div class="formDiv">
+                        <input type="submit" value="supprimer"><br><br>
+                    </div>
+                </form>
+
+            </div>
+            <div th:case="'5'"  >
+                <div th:if="${message!=null}" class="alert alert-success text-center">
+                    [[${message}]]
+                </div>
+
+
+                <form  id="signupForm" method="post" th:action="@{/enregistrerUtilisateur}" role="form"
+                       onsubmit="return checkEmailandUsernameUnique(this)"  >
+
+
+                        <label for="username">Username:</label>
+                        <input  type="text" id="username" name="username" required placeholder="rentrer le nom d'utilisateur">
+
+
+                        <label for="email">Email:</label>
+                        <input  type="email" id="useremail" name="email" required placeholder="rentrer l'email">
+
+
+                        <label for="password">mot de passe:</label>
+                        <input  type="text" id="userpassword" name="password" required placeholder="rentrer le mot de passe ">
+
+                        <label for="status">status:</label>
+                        <select  id="status" name="status" class="form-control" required>
+                            <option value="" disabled selected>Choisissez un statut</option>
+                            <option value="admin">Admin</option>
+                            <option value="utilisateur">Utilisateur</option>
+                            <option value="membreplus">Membre Plus</option>
+                        </select>
+
+
+                    <label for="active">Active</label>
+                    <input type="checkbox" id="active" name="active" onchange="toggleCheckboxValue(this)" checked>
+
+
+
+                    <div class="formDiv">
+                        <input type="submit" value="Enregistrer" placeholder="Clicker pour enregistrer">
+                    </div>
+                </form>
+
+            </div>
+            <div th:case="'6'" >
+                <div th:if="${message!=null}" class="alert alert-success text-center">
+                    [[${message}]]
+                </div>
+                <table class="table table-bordered table-striped table-hover table-responsive-xl">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th class="hideable-column">ID utilisateur
+                        </th>
+
+
+                        <th class="hideable-column"> E-mail
+
+                        </th>
+                        <th>Username</th>
+                        <th>Status</th>
+                        <th>Active</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${listUtilisateurs}">
+                        <td class="hideable-column">[[${user.id}]]</td>
+
+                        <td class="hideable-column">[[${user.courriel}]]</td>
+                        <td>[[${user.userName}]]</td>
+                        <td>[[${user.status}]]</td>
+                        <td>
+
+                            <a th:if="${user.isActive() == true}" class="fa-solid fa-lock-open "
+                               th:href="@{'/utilisateurs/' +${user.id} + '/active/false'}"
+                               title="Desactiver cet utilisateur"
+                            >
+
+
+                            </a>
+
+                            <a  th:if="${user.isActive() == false}" class="fa-solid fa-lock " style="color: grey;"
+                               th:href="@{'/utilisateurs/' +${user.id} + '/active/true'}"
+                               title="Activer cet utilisateur"
+                            >
+
+                            </a>
+
+                        </td>
+                        <td>
+                          <!--  <a class="fa-solid fa-pen-to-square " th:href="@{'/utilisateurs/edit/' + ${user.id}}" title="Editer cet utilisareur"></a> -->
+                            <!--
+                            <a class="fas fa-edit fa-2x icon-green" href="" title="Editer cet utilsateur"></a>
+                            -->
+                            &nbsp;
+                            <a class="fa-solid fa-trash   link-delete " style="color: red;"
+                               th:href="@{'/utilisateurs/delete/' + ${user.id}}"
+                               th:userId="${user.id}"
+                               title="Supprimer cet utilisateur"></a>
+
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Add other cases similarly -->
+
+
+        </div>
+
+    </div>
+</div>
+<div th:insert="/include/footer"> </div>
+<script>
+
+    function checkEmailandUsernameUnique(form){
+        // alert("vérification Email");
+
+        $.ajax({
+            type:'POST',
+            url:'[[@{/inscription/check_email_username}]]',
+            data:{email: $("#useremail").val(),
+                id: $("#id").val(),
+                username: $("#username").val()},
+            success:function (data) {
+                // alert("Repense venant du serveur"+data);
+                if(data==='OK'){
+                    form.submit();
+                    showNiceAlert("success", "votre inscription est réussite!", 'success');
+                }else if(data ==="email"){
+                    // alert("Repense venant du serveur :"+data);
+                    showNiceAlert("Erreur", "Cet email : '" + $("#useremail").val() + "' est déjà utilisé, veuillez utiliser un autre Email.", 'error');
+                }else if(data ==="username"){
+                    showNiceAlert("Erreur", "Cet nom d'utilisateur : '" + $("#username").val() + "' est déjà utilisé, veuillez utiliser un autre nom d'utlisateur.", 'error');
+                }
+            },
+            error: function(xhr, status, error) {
+                var errorMessage = "Une erreur s'est produite lors de la vérification de l'email.";
+                showNiceAlert("Erreur", errorMessage, 'error');
+            }
+        })
+        return false;
+    }
+    function showNiceAlert(title, message, type = 'info') {
+        // Remove any existing alerts
+        $('.nice-alert').remove();
+
+        // Create the alert element
+        var alertClass = 'alert-info';
+        if (type === 'error') {
+            alertClass = 'alert-danger';
+        } else if (type === 'success') {
+            alertClass = 'alert-success';
+        }
+
+        var alertHtml = `
+        <div class="alert ${alertClass} alert-dismissible fade show nice-alert" role="alert">
+            <strong>${title}</strong> ${message}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    `;
+
+        // Append the alert to the page
+        $('body').prepend(alertHtml); // Prepend to show at the top of the page
+
+        // Automatically dismiss the alert after 5 seconds
+        setTimeout(function() {
+            $('.nice-alert').alert('close');
+        }, 5000);
+    }
+
+    function toggleCheckboxValue(checkbox) {
+        checkbox.value = checkbox.checked;
+    }
+
+</script>
+</body>
+</html>

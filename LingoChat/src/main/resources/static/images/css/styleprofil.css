@@ -1,0 +1,476 @@
+* {
+    font-family: Verdana, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.insideGreyBox {
+    display: flex;
+    width: 99vw;
+    min-height: 80vh;
+    margin-top: 10px;
+}
+
+
+.leftFriendlist {
+    min-width: 350px;
+    max-width: 30%;
+    background-color: rgb(198, 198, 198);
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.leftFriendlist h1 {
+    color: white;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.leftFriendlist hr {
+    height: 2px;
+    background-color: white;
+}
+.leftFriendlist p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.rechercheAmis input[type="search"] {
+    background-color: white;
+    border-radius: 5px;
+    width: calc(100% - 103px);
+    height: 30px;
+    border-color: #A8DEE0;
+    border-width: 2px;
+}
+
+.rechercheAmis input[type="search"]::placeholder {
+    color: #AEAEAE;
+    /* Set the color you want */
+
+}
+
+.rechercheAmis input[type="submit"]:hover {
+    background-color: #A8DEE0;
+    color: white;
+}
+
+.rechercheAmis input[type="submit"] {
+    background-color: white;
+    color: #AEAEAE;
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+}
+
+.leftFriendlist>p {
+    color: white;
+}
+
+.friendListDisplay {
+    min-width: 300px;
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+}
+
+.friend {
+    display: flex;
+    background-color: #A8DEE0;
+    border-radius: 5px;
+    padding: 12px;
+    margin-bottom: 12px;
+    max-height: 80px;
+}
+
+.friend img {
+    flex-shrink: 0;
+    height: 85px;
+    object-fit: cover;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+}
+
+.friend p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: white;
+
+}
+.friend a{
+    text-decoration: none;
+}
+
+.shortLeftInfo {
+    margin-left: 10px;
+    display: block;
+
+}
+.NameAndFavorite{
+    display: inline-flex;
+}
+.star{
+    margin-top: 3px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.friend input[type="submit"] {
+    margin-top: 6px;
+    background-color: white;
+    color: #AEAEAE;
+    border: none;
+    border-radius: 5px;
+    height: 20px;
+    font-size: 12px;
+    display: block;
+
+}
+
+.friendListDisplay::-webkit-scrollbar {
+    width: 8px;
+    /* Set the width of the scrollbar */
+}
+
+.friendListDisplay::-webkit-scrollbar-thumb {
+    background: #ffffff;
+    /* Set the color of the scrollbar handle */
+    border-radius: 4px;
+    /* Set the border radius of the scrollbar handle */
+}
+
+.friendListDisplay::-webkit-scrollbar-thumb:hover {
+    background: #AEAEAE;
+    /* Change color on hover */
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    /* Set the width of the scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ffffff;
+    /* Set the color of the scrollbar handle */
+    border-radius: 4px;
+    /* Set the border radius of the scrollbar handle */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #AEAEAE;
+    /* Change color on hover */
+}
+
+.rightFriendprofile {
+    display: flex;
+    background-color: rgb(198, 198, 198);
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 5px;
+    /* Take full height of the viewport */
+    flex-direction: column;
+    flex: 1;
+}
+
+.topSection {
+    background-image: linear-gradient(to bottom right, rgba(167, 214, 118, 0.843), rgba(168, 222, 224, 0.7));
+    display: flex;
+    flex-direction: row;
+    /* Display children side by side */
+    align-items: flex-start;
+    /* Align children to the top */
+    padding: 25px;
+    margin-top: 10px;
+    border-radius: 5px;
+    /* Add some space between topSection and BottomRefProfile */
+    /* Take up available space */
+    color: white;
+
+}
+
+.icon-yellow {
+    color: #ffe863;
+}
+.friendIconStatusAdd{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 5px; /* Adjust this value to your preference for spacing between the icon and the image */
+    margin-right: 60px; /* Adjust this value to your preference for spacing between the icon and the image */
+    text-decoration: none;
+    background-color: white;
+    border-radius: 50%;
+    font-size: 2.5em;
+}
+.friendIconStatusAdd:hover{
+    text-decoration: none;
+}
+
+
+.image-container {
+    position: relative;
+    display: inline-block; /* Ensure that the container wraps around the image and the icon */
+}
+
+.image-container> img {
+    flex-shrink: 0;
+    width: 300px;
+    object-fit: cover;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    margin-right: 10px;
+    border: 5px solid #A8DEE0;
+    /* Add margin between image and content */
+}
+
+.rightInfoProfil h1,
+p {
+    margin: 0px;
+}
+
+.rightInfoProfil {
+    margin-left: 25px;
+}
+
+
+.langues div p {
+    margin: 0;
+    /* Remove default margin of paragraphs */
+}
+
+.langues {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    min-width: 550px;
+
+}
+
+.langues > div {
+    display: flex;
+    margin-bottom: 20px; /* Add spacing between sections */
+    flex-flow: row wrap; /* Allow items to wrap onto multiple lines */
+
+}
+
+.langue-container {
+    display: flex;
+    max-width: 55px; /* Adjust the value as needed */
+    position: relative;
+    display: inline-block; /* Ensure that the container wraps around the image and the icon */
+}
+
+.langues img {
+    width: 50px;
+    height: 40px; /* Set a fixed height for the images */
+    object-fit: cover; /* Crop the overflow */
+    margin-right: 10px; /* Add spacing between images */
+    border-radius: 5px;
+}
+.lien p {
+    margin-bottom: 0px;
+}
+.link a {
+    font-size: 14px; /* Adjust the font size as needed */
+    color: #2b33db; /* Set the color of the text */
+    text-decoration: none;
+
+}
+.link a:hover{
+    color: #9500ff; /* Set the color of the text */
+}
+.lien-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+.icon-delete{
+    margin-top: 3px;
+    margin-bottom: 10px; /* Adjust this value to your preference for spacing between the icon and the image */
+    margin-right: 5px; /* Adjust this value to your preference for spacing between the icon and the image */
+    background-color: white;
+    border-radius: 50%;
+    }
+
+.icon-delete:hover{
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 830px) {
+    .link-form {
+        display: none; /* Hide the form on screens smaller than 768px */
+    }
+}
+.BottomRefProfile {
+    flex: 1;
+    /* Take up the other half of the available height */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    /* Align content to the bottom */
+    align-items: flex-start;
+}
+
+.BottomRefProfile h3 {
+    margin-top: 10px;
+    margin-bottom: 1px;
+    color: white;
+}
+
+.listeRef {
+    width: 100%;
+    height: 100%;
+}
+.BottomRefProfile hr {
+    height: 2px;
+    background-color: white;
+
+}
+.uneRef {
+    display: flex;
+    border-left: 2px solid #A8DEE0;
+    padding: 5px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    background-color: white;
+
+}
+
+.auteurDesc>p {
+    font-size: 0.7em;
+    color: #33539E;
+    text-decoration: underline;
+}
+.auteurDesc>h6 {
+    font-size: 0.7em;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    font-weight: 500;
+}
+
+.uneRef img {
+    flex-shrink: 0;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    margin-right: 10px;
+    border: 3px solid #A8DEE0;
+
+    /* Add margin between image and content */
+}
+.topSection form {
+    margin-left: 20px;
+}
+.topSection input[type="submit"] {
+    background-color: white;
+    color: #AEAEAE;
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+}
+.topSection textarea {
+    width: 100%; /* Adjust the width minus any padding or border */
+    height: 100%;
+    padding: 100px; /* Adjust padding as needed */
+    border: 4px solid #A8DEE0; /* Adjust border as needed */
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+}
+/*SECTION DU ADD LIEN*/
+.unBlocText h4{
+    margin: 0px;
+    margin-bottom: 4px;
+    font-size: 20px; /* Set the font size of the button text */
+    margin-top: 5px;
+
+}
+.unBlocText input[type="text"]{
+    padding: 5px;
+    margin-bottom: 4px;
+    border-radius: 10px;
+    border-width: 3px;
+    border-color: #A8DEE0;
+}
+.unBlocText input[type="submit"]{
+    width: 125px; /* Set the width of the button */
+    height: 25px; /* Set the height of the button */
+    font-size: 12px; /* Set the font size of the button text */
+    border: 3px solid #A8DEE0;
+}
+
+.langueSelect{
+    margin-left: 50px;
+    max-width: 300px;
+}
+.langueSelect h4{
+    font-size: 20px; /* Set the font size of the button text */
+    margin-top: 5px;
+
+}
+.langueSelect > div {
+    display: flex;
+    margin-bottom: 20px; /* Add spacing between sections */
+    flex-flow: row wrap; /* Allow items to wrap onto multiple lines */
+
+}
+.langueSelect img {
+    width: 50px;
+    height: 40px; /* Set a fixed height for the images */
+    object-fit: cover; /* Crop the overflow */
+    margin-right: 10px; /* Add spacing between images */
+    margin-bottom: 10px; /* Add spacing between images */
+    border-radius: 5px;
+}
+.icon-blue:hover {
+    color: #28a828;
+}
+.icon-green {
+    color: #28a828;
+}
+.icon-green:hover {
+    color: #bd2727;
+}
+
+.languesFlag{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-decoration: none;
+    margin-bottom: 5px; /* Adjust this value to your preference for spacing between the icon and the image */
+    font-size: 1.3em; /* 1.5 times the default size */
+    background-color: white;
+    border-radius: 50%;
+}
+.languesFlag:hover{
+    text-decoration: none;
+}
+/*SECTION DES ADD REFS*/
+.sectionADiviser{
+    display: flex;
+}
+.addRef {
+    padding-top: 0px ;
+    margin-left: 10px;
+}
+.addRef {
+    padding-top: 0px ;
+    margin-left: 10px;
+}
+#refArea{
+    display: block;
+    margin-bottom: 5px;
+}
+
+.addRef input[type="submit"] {
+    margin-top: 5px;
+    background-color: #D9D9D9;
+    color: #33539E;
+    padding: 5px;
+    border: 3px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+}
+.addRef input[type="submit"]:hover {
+    background-color: #A7D676;
+}
+#refArea{
+    border: 3px solid #33539E;
+}

@@ -1,0 +1,28 @@
+<section class="displaySearchResult">
+
+    <div class="displayPersonne" *ngFor="let user of utilisateurs; let i=index">
+
+        <app-photo-utilisateur [utilisateur]="user"></app-photo-utilisateur>
+
+        <div class="infoRight">
+            <h3>{{user.userName}}</h3>
+
+            <div class="imgDrapeauxLangues">
+                <h4>Langue(s) parlée(s)</h4>
+
+                <div>
+                    <div class="langue-container" *ngFor="let lang of user.languesParle; let i=index">
+                        <img [src]="'../../../assets/images/drapeaux/' + lang.photo" alt="lang.nom">
+                    </div>
+                </div>
+
+                <h4>Langue(s) apprise(s)</h4>
+                <div>
+                    <div class="langue-container" *ngFor="let lang of user.languesApprise; let i=index">
+                        <img [src]="'../../../assets/images/drapeaux/' + lang.photo" alt="lang.nom">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

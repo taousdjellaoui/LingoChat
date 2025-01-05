@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/images/css/style.css}"/>
+
+</head>
+<header>
+
+    <div class="navbar">
+            <a th:href="@{/}"><img class ="logoIndex" src="/images/logo/LeftLogo.png" alt="logo" height="30px"></a>
+        <div class="navbar-bar">
+            <ul>
+                <li><a th:href="@{/discover}">Découvrir</a></li>
+                <li><a th:href="@{/community}">Communauté</a></li>
+                <li th:if="${session.username != null}"><a th:href="@{/forum_create}">Forum</a></li>
+                <li th:if="${session.username != null}"><a th:href="@{/amis}">Amis</a></li>
+                <li th:if="${session.username != null}"><a th:href="@{'/profil_'+${session.id}}">Profil</a></li>
+
+                <div class="headerLeft" th:if="${session.username == null}">
+
+                    <li ><a th:href="@{/inscription}">Insciption</a></li>
+                    <li ><a th:href="@{/connexion}">Connexion</a></li>
+                </div>
+                <div class="headerLeft" th:if="${session.username != null}">
+
+                    <li ><a th:href="@{/deconnexion}">Deconnexion</a></li>
+
+                </div>
+
+            </ul>
+        </div>
+        <a th:if="${session.username != null}" th:href="@{/accountInfo}" title="paramétres"><img class ="logoIndex" src="/images/logo/parameter-icon.jpg" alt="logo" height="30px"></a>
+    </div>
+</header>
+</html>
